@@ -1,6 +1,7 @@
 package dmn.your.pkg.destination
 
 import com.segment.analytics.kotlin.core.*
+import com.segment.analytics.kotlin.core.platform.Plugin
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
@@ -9,11 +10,10 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 
-class FooDestinationTests {
+class ExampleDestinationTests {
 
-    private val fooDestination: FooDestination = FooDestination() /* init */
+    private val exampleDestination: ExampleDestination = ExampleDestination() /* init */
 
     @Test
     fun `settings are updated correctly`() {
@@ -28,11 +28,11 @@ class FooDestinationTests {
               }
             }
         """.trimIndent())
-        fooDestination.update(settingsBlob)
+        exampleDestination.update(settingsBlob, Plugin.UpdateType.Initial)
 
         /* assertions about config */
-        assertNotNull(fooDestination.settings)
-        with(fooDestination.settings!!) {
+        assertNotNull(exampleDestination.settings)
+        with(exampleDestination.settings!!) {
             assertTrue(configA)
             assertEquals(10, configB)
             assertEquals("value3", configC)
@@ -53,7 +53,7 @@ class FooDestinationTests {
             context = emptyJsonObject
             timestamp = "2021-07-13T00:59:09"
         }
-        val trackEvent = fooDestination.track(sampleEvent)
+        val trackEvent = exampleDestination.track(sampleEvent)
 
         /* assertions about new event */
         assertNotNull(trackEvent)
@@ -76,7 +76,7 @@ class FooDestinationTests {
             context = emptyJsonObject
             timestamp = "2021-07-13T00:59:09"
         }
-        val identifyEvent = fooDestination.identify(sampleEvent)
+        val identifyEvent = exampleDestination.identify(sampleEvent)
 
         /* assertions about new event */
         assertNotNull(identifyEvent)
@@ -99,7 +99,7 @@ class FooDestinationTests {
             context = emptyJsonObject
             timestamp = "2021-07-13T00:59:09"
         }
-        val groupEvent = fooDestination.group(sampleEvent)
+        val groupEvent = exampleDestination.group(sampleEvent)
 
         /* assertions about new event */
         assertNotNull(groupEvent)
@@ -126,7 +126,7 @@ class FooDestinationTests {
             context = emptyJsonObject
             timestamp = "2021-07-13T00:59:09"
         }
-        val screenEvent = fooDestination.screen(sampleEvent)
+        val screenEvent = exampleDestination.screen(sampleEvent)
 
         /* assertions about new event */
         assertNotNull(screenEvent)
