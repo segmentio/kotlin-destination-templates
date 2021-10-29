@@ -7,12 +7,12 @@ The default package name is `dmn.your.pkg.destination` (to be renamed by you)
 To standardize fetching and using settings in your destination, we recommend using a data class to store your destination settings. If marked `@Serializable`, it will enable you to retrieve your destination settings in a strongly typed construct.
 
 ### Settings-related functions
-We provide APIs to easily check and fetch your destination settings.
+We provide APIs to easily check and fetch your destination settings via `update(settings:type:)`. `UpdateType.initial` lets you know if this is the intial or subsequent fetch.
 `Settings.isDestinationEnabled(name: String)`
 - check if your destination is enabled
 
 `Settings.destinationSettings(name: String)`
-- retrieve a typed destination object
+- retrieve the settings in a typed construct
 
 ### Sample implementation for common destination functions
 We have templated common destinations functions like `track`, `identify`, `screen`, `group`, `alias` that you should modify to fit your vendor SDK implementation. Although these functions do not need to return the ending payload, its good practice to do so (for unit testing purposes)
